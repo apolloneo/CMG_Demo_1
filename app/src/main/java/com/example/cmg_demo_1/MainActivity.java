@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private MyHandler mHandler;
     private Handler mMsgSendHandler;
     private MyRunnable mRunnableCode;
-    private int mAutoUpdateTimerInterval = 3000;
+    private int mAutoUpdateTimerInterval = 5000;
     private static int mButtonClickCounter = 1;
     private long mButtonClickTimer = 0;
 
@@ -199,16 +199,18 @@ public class MainActivity extends AppCompatActivity {
             //int r2 = new Random().nextInt(999) + 1;
             String[] randomJackpotValues = new String[JACKPOT_QTY];
             for (int n = 0; n < JACKPOT_QTY; n++){
-                int tempInt = new Random().nextInt(999) + 100;
+                int tempInt = new Random().nextInt(899) + 100;
                 randomJackpotValues[n] = String.valueOf(tempInt);
             }
             String[] randomMsgValues = new String[MSG_QTY];
             for (int n = 0; n < JACKPOT_QTY; n++){
                 StringBuilder randomStringBuilder = new StringBuilder();
                 //int randomLength = new Random().nextInt(5);
+                String strCollection = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!$&*@#%,.";
                 char tempChar;
                 for (int i = 0; i < 5; i++){
-                    tempChar = (char) (new Random().nextInt(96) + 32);
+                    //tempChar = (char) (new Random().nextInt(96) + 32);
+                    tempChar = strCollection.charAt(new Random().nextInt(strCollection.length()));
                     randomStringBuilder.append(tempChar);
                 }
                 randomMsgValues[n] = randomStringBuilder.toString();
@@ -227,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
             if (usbService != null) {
                 usbService.write(data.getBytes());
                 Toast.makeText(getApplicationContext(), "Sending: " + data, Toast.LENGTH_SHORT).show();
+                textViewTest.append(data + "\n");
             }
             mMsgSendHandler.postDelayed(this, interval);
         }
@@ -428,11 +431,11 @@ public class MainActivity extends AppCompatActivity {
                     //    updateButton.setText(R.string.manual_update);
                     //}
                 } else {
-                    if (updateButton.getText().equals(R.string.auto_update)) {
-                        updateButton.setText(R.string.stop);
-                        mMsgSendHandler.postDelayed(mRunnableCode, mAutoUpdateTimerInterval);
+                    if (updateButton.getText().equals(getResources().getString(R.string.auto_update))) {
+                        updateButton.setText(getResources().getString(R.string.stop));
+                        mMsgSendHandler.postDelayed(mRunnableCode, 0);
                     } else {
-                        updateButton.setText(R.string.stop);
+                        updateButton.setText(getResources().getString(R.string.auto_update));
                         mMsgSendHandler.removeCallbacks(mRunnableCode);
                     }
                 }
