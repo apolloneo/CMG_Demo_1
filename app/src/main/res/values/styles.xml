@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SplashActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_spashscreen</item>
+    </style>
+
     <style name="SegmentDisplay">
         <item name="android:textColor">@color/colorRed</item>
         <item name="android:fontFamily">@font/dseg7</item>
@@ -16,6 +20,8 @@
         <item name="android:gravity">end|center_vertical</item>
         <item name="android:background">@drawable/independent_display</item>
         <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">3</item>
     </style>
 
     <style name="MsgDisplay">
@@ -26,6 +32,8 @@
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/independent_display</item>
         <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">5</item>
     </style>
 
 </resources>
