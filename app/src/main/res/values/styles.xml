@@ -1,0 +1,31 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="SegmentDisplay">
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="android:fontFamily">@font/dseg7</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:gravity">end|center_vertical</item>
+        <item name="android:background">@drawable/independent_display</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="MsgDisplay">
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="android:fontFamily">@font/dm5_7</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/independent_display</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+</resources>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView_Settings_SettingFrag_Titile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/cmg_settings_title"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_Settings_MfcCode_Tile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/select_manufacturer_code_title"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton_Settings_MfcCode_Value"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Settings_SettingFrag_Titile" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton_Settings_MfcCode_Value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:enabled="true"
+        android:textOff="@string/pl"
+        android:textOn="@string/cm"
+        app:layout_constraintStart_toEndOf="@+id/textView_Settings_MfcCode_Tile"
+        app:layout_constraintEnd_toStartOf="@id/textView_Settings_StateCode_Title"
+        app:layout_constraintTop_toTopOf="@id/textView_Settings_MfcCode_Tile"
+        app:layout_constraintBottom_toBottomOf="@id/textView_Settings_MfcCode_Tile"/>
+
+    <TextView
+        android:id="@+id/textView_Settings_StateCode_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:text="@string/state_code_title"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton_Settings_MfcCode_Value"
+        app:layout_constraintEnd_toStartOf="@id/spinner_Settings_StateCode_Value"
+        app:layout_constraintTop_toTopOf="@id/textView_Settings_MfcCode_Tile"
+        app:layout_constraintBottom_toBottomOf="@id/textView_Settings_MfcCode_Tile"/>
+
+    <Spinner
+        android:id="@+id/spinner_Settings_StateCode_Value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/textView_Settings_StateCode_Title"
+        app:layout_constraintEnd_toStartOf="@id/textView_Settings_SignId_Title"
+        app:layout_constraintTop_toTopOf="@id/textView_Settings_MfcCode_Tile"
+        app:layout_constraintBottom_toBottomOf="@id/textView_Settings_MfcCode_Tile"/>
+
+    <TextView
+        android:id="@+id/textView_Settings_SignId_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:text="@string/sign_number_title"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/spinner_Settings_StateCode_Value"
+        app:layout_constraintEnd_toStartOf="@id/editText_Settings_SignId_Value"
+        app:layout_constraintTop_toTopOf="@id/textView_Settings_MfcCode_Tile"
+        app:layout_constraintBottom_toBottomOf="@id/textView_Settings_MfcCode_Tile"/>
+
+    <EditText
+        android:id="@+id/editText_Settings_SignId_Value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
+        android:inputType="number"
+        android:maxLength="6"
+        android:text="000001"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textView_Settings_SignId_Title"
+        app:layout_constraintTop_toTopOf="@id/textView_Settings_MfcCode_Tile"
+        app:layout_constraintBottom_toBottomOf="@id/textView_Settings_MfcCode_Tile"/>
+
+    <TextView
+        android:id="@+id/textView_Settings_PanelEffectCode_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/select_panel_effect_code_title"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Settings_MfcCode_Tile" />
+
+    <Spinner
+        android:id="@+id/spinner_Settings_PEC_1_Value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/textView_Settings_PanelEffectCode_Title"
+        app:layout_constraintTop_toTopOf="@id/textView_Settings_PanelEffectCode_Title"
+        app:layout_constraintBottom_toBottomOf="@id/textView_Settings_PanelEffectCode_Title"
+        />
+
+    <Spinner
+        android:id="@+id/spinner_Settings_PEC_2_Value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/spinner_Settings_PEC_1_Value"
+        app:layout_constraintTop_toTopOf="@id/textView_Settings_PanelEffectCode_Title"
+        app:layout_constraintBottom_toBottomOf="@id/textView_Settings_PanelEffectCode_Title"
+        />
+
+    <Button
+        android:id="@+id/button_Settings_Confirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:text="@string/confirm"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_Settings_Cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Settings_PanelEffectCode_Title" />
+
+    <Button
+        android:id="@+id/button_Settings_Cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_Settings_Confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_Settings_Confirm"
+        app:layout_constraintTop_toTopOf="@+id/button_Settings_Confirm" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

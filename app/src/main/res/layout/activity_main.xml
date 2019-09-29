@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView_MainActivity_Test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        style="@style/SegmentDisplay"
+        android:id="@+id/editText_MainActivity_Jackpot_Value_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/digit_display_default_value_888"
+        android:textSize="64sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Spinner
+        android:id="@+id/spinner_MainActivity_DigitEffectCode_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/editText_MainActivity_Jackpot_Value_1"
+        app:layout_constraintEnd_toEndOf="@id/editText_MainActivity_Jackpot_Value_1"
+        app:layout_constraintTop_toBottomOf="@id/editText_MainActivity_Jackpot_Value_1"/>
+
+    <EditText
+        style="@style/MsgDisplay"
+        android:id="@+id/editText_MainActivity_Msg_Str_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/msg_display_default_value_1"
+        android:textSize="32dp"
+        app:layout_constraintStart_toStartOf="@+id/editText_MainActivity_Jackpot_Value_1"
+        app:layout_constraintEnd_toEndOf="@+id/editText_MainActivity_Jackpot_Value_1"
+        app:layout_constraintTop_toBottomOf="@id/spinner_MainActivity_DigitEffectCode_1"/>
+
+    <Spinner
+        android:id="@+id/spinner_MainActivity_MsgEffectCode_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/editText_MainActivity_Jackpot_Value_1"
+        app:layout_constraintEnd_toEndOf="@id/editText_MainActivity_Jackpot_Value_1"
+        app:layout_constraintTop_toBottomOf="@id/editText_MainActivity_Msg_Str_1"/>
+
+    <EditText
+        style="@style/SegmentDisplay"
+        android:id="@+id/editText_MainActivity_Jackpot_Value_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/digit_display_default_value_888"
+        android:textSize="64sp"
+        app:layout_constraintStart_toEndOf="@id/editText_MainActivity_Jackpot_Value_1"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Spinner
+        android:id="@+id/spinner_MainActivity_DigitEffectCode_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/editText_MainActivity_Jackpot_Value_2"
+        app:layout_constraintEnd_toEndOf="@id/editText_MainActivity_Jackpot_Value_2"
+        app:layout_constraintTop_toBottomOf="@id/editText_MainActivity_Jackpot_Value_2"/>
+
+    <EditText
+        style="@style/MsgDisplay"
+        android:id="@+id/editText_MainActivity_Msg_Str_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/msg_display_default_value_2"
+        android:textSize="32dp"
+        app:layout_constraintStart_toStartOf="@+id/editText_MainActivity_Jackpot_Value_2"
+        app:layout_constraintEnd_toEndOf="@+id/editText_MainActivity_Jackpot_Value_2"
+        app:layout_constraintTop_toBottomOf="@id/spinner_MainActivity_DigitEffectCode_2"/>
+
+    <Spinner
+        android:id="@+id/spinner_MainActivity_MsgEffectCode_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/editText_MainActivity_Jackpot_Value_2"
+        app:layout_constraintEnd_toEndOf="@id/editText_MainActivity_Jackpot_Value_2"
+        app:layout_constraintTop_toBottomOf="@id/editText_MainActivity_Msg_Str_2"/>
+
+    <EditText
+        style="@style/SegmentDisplay"
+        android:id="@+id/editText_MainActivity_Jackpot_Value_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/digit_display_default_value_888"
+        android:textSize="64sp"
+        app:layout_constraintStart_toEndOf="@id/editText_MainActivity_Jackpot_Value_2"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Spinner
+        android:id="@+id/spinner_MainActivity_DigitEffectCode_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/editText_MainActivity_Jackpot_Value_3"
+        app:layout_constraintEnd_toEndOf="@id/editText_MainActivity_Jackpot_Value_3"
+        app:layout_constraintTop_toBottomOf="@id/editText_MainActivity_Jackpot_Value_3"/>
+
+    <EditText
+        style="@style/MsgDisplay"
+        android:id="@+id/editText_MainActivity_Msg_Str_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/msg_display_default_value_1"
+        android:textSize="32dp"
+        app:layout_constraintStart_toStartOf="@+id/editText_MainActivity_Jackpot_Value_3"
+        app:layout_constraintEnd_toEndOf="@+id/editText_MainActivity_Jackpot_Value_3"
+        app:layout_constraintTop_toBottomOf="@id/spinner_MainActivity_DigitEffectCode_3"/>
+
+    <Spinner
+        android:id="@+id/spinner_MainActivity_MsgEffectCode_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/editText_MainActivity_Jackpot_Value_3"
+        app:layout_constraintEnd_toEndOf="@id/editText_MainActivity_Jackpot_Value_3"
+        app:layout_constraintTop_toBottomOf="@id/editText_MainActivity_Msg_Str_3"/>
+
+
+    <EditText
+        style="@style/SegmentDisplay"
+        android:id="@+id/editText_MainActivity_Jackpot_Value_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/digit_display_default_value_888"
+        android:textSize="64sp"
+        app:layout_constraintStart_toEndOf="@id/editText_MainActivity_Jackpot_Value_3"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Spinner
+        android:id="@+id/spinner_MainActivity_DigitEffectCode_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/editText_MainActivity_Jackpot_Value_4"
+        app:layout_constraintEnd_toEndOf="@id/editText_MainActivity_Jackpot_Value_4"
+        app:layout_constraintTop_toBottomOf="@id/editText_MainActivity_Jackpot_Value_4"/>
+
+
+    <EditText
+        style="@style/MsgDisplay"
+        android:id="@+id/editText_MainActivity_Msg_Str_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/msg_display_default_value_2"
+        android:textSize="32dp"
+        app:layout_constraintStart_toStartOf="@+id/editText_MainActivity_Jackpot_Value_4"
+        app:layout_constraintEnd_toEndOf="@+id/editText_MainActivity_Jackpot_Value_4"
+        app:layout_constraintTop_toBottomOf="@id/spinner_MainActivity_DigitEffectCode_4"/>
+
+    <Spinner
+        android:id="@+id/spinner_MainActivity_MsgEffectCode_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/editText_MainActivity_Jackpot_Value_4"
+        app:layout_constraintEnd_toEndOf="@id/editText_MainActivity_Jackpot_Value_4"
+        app:layout_constraintTop_toBottomOf="@id/editText_MainActivity_Msg_Str_4"/>
+
+    <CheckBox
+        android:id="@+id/checkBox_MainActivity_AutoUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/auto_update"
+        app:layout_constraintBottom_toTopOf="@+id/button_MainActivity_Update"
+        app:layout_constraintStart_toStartOf="@+id/button_MainActivity_Update" />
+
+    <Button
+        android:id="@+id/button_MainActivity_Update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/manual_update"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button_MainActivity_Settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SETTINGS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
