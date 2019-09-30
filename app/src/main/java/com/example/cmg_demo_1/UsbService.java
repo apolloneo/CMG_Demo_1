@@ -158,7 +158,11 @@ public class UsbService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        serialPort.close();
+        try {
+            serialPort.close();
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
         unregisterReceiver(usbReceiver);
         UsbService.SERVICE_CONNECTED = false;
     }
