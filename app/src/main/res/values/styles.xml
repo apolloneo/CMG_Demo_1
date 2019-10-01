@@ -8,8 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="SplashActivity" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="HomeScreenActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--
         <item name="android:windowBackground">@drawable/background_spashscreen</item>
+        -->
     </style>
 
     <style name="SegmentDisplay">

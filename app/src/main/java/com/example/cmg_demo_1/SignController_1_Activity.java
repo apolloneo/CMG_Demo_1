@@ -5,16 +5,12 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,9 +26,9 @@ import java.lang.ref.WeakReference;
 import java.util.Random;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity {
+public class SignController_1_Activity extends AppCompatActivity {
     //widgets
-    Button updateButton, settingsButton;
+    Button updateButton, settingsButton, goHomebutton, helpbutton;
     CheckBox autoUpdateCheckBox;
     TextView textViewTest;
     EditText[] editTextJackpotValues = new EditText[JACKPOT_QTY];
@@ -50,64 +46,79 @@ public class MainActivity extends AppCompatActivity {
             mCurrentMsgEffectCodeArray = new String[MSG_QTY];
     private ArrayAdapter<CharSequence> spinnerSharedArrayAdapter;
     private SharedViewModel mSharedViewModel;
-    private UsbService usbService;
-    private MyHandler mHandler;
+    //private UsbService usbService;
+    //private MyHandler mHandler;
     private Handler mMsgSendHandler;
     private MyRunnable mRunnableCode;
     private int mAutoUpdateTimerInterval = 5000;
     private static int mButtonClickCounter = 1;
     private long mButtonClickTimer = 0;
 
-    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
+    //this broadcaster receiver handles the data from UsbService received data from serial port
+    private final BroadcastReceiver mSerialDataReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            switch (intent.getAction()) {
-                case UsbService.ACTION_USB_PERMISSION_GRANTED: // USB PERMISSION GRANTED
-                    Toast.makeText(context, "USB Ready", Toast.LENGTH_SHORT).show();
-                    break;
-                case UsbService.ACTION_USB_PERMISSION_NOT_GRANTED: // USB PERMISSION NOT GRANTED
-                    Toast.makeText(context, "USB Permission not granted", Toast.LENGTH_SHORT).show();
-                    break;
-                case UsbService.ACTION_NO_USB: // NO USB CONNECTED
-                    Toast.makeText(context, "No USB connected", Toast.LENGTH_SHORT).show();
-                    break;
-                case UsbService.ACTION_USB_DISCONNECTED: // USB DISCONNECTED
-                    Toast.makeText(context, "USB disconnected", Toast.LENGTH_SHORT).show();
-                    break;
-                case UsbService.ACTION_USB_NOT_SUPPORTED: // USB NOT SUPPORTED
-                    Toast.makeText(context, "USB device not supported", Toast.LENGTH_SHORT).show();
-                    break;
+            String action = intent.getAction();
+            try {
+                if (action.equals(UsbService.ACTION_USB_DATA_RECEIVED)) {
+                    byte[] dataReceived = intent.getExtras().getByteArray(UsbService.SERIAL_DATA_RECEIVED);
+                    Toast.makeText(getApplicationContext(), "Serial Data Received: " + dataReceived.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }catch (NullPointerException e) {
+                e.printStackTrace();
             }
         }
     };
+    //private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
+    //    @Override
+    //    public void onReceive(Context context, Intent intent) {
+    //        switch (intent.getAction()) {
+    //            case UsbService.ACTION_USB_PERMISSION_GRANTED: // USB PERMISSION GRANTED
+    //                Toast.makeText(context, "USB Ready", Toast.LENGTH_SHORT).show();
+    //                break;
+    //            case UsbService.ACTION_USB_PERMISSION_NOT_GRANTED: // USB PERMISSION NOT GRANTED
+    //                Toast.makeText(context, "USB Permission not granted", Toast.LENGTH_SHORT).show();
+    //                break;
+    //            case UsbService.ACTION_NO_USB: // NO USB CONNECTED
+    //                Toast.makeText(context, "No USB connected", Toast.LENGTH_SHORT).show();
+    //                break;
+    //            case UsbService.ACTION_USB_DISCONNECTED: // USB DISCONNECTED
+    //                Toast.makeText(context, "USB disconnected", Toast.LENGTH_SHORT).show();
+    //                break;
+    //            case UsbService.ACTION_USB_NOT_SUPPORTED: // USB NOT SUPPORTED
+    //                Toast.makeText(context, "USB device not supported", Toast.LENGTH_SHORT).show();
+    //                break;
+    //        }
+    //    }
+    //};
 
-    private final ServiceConnection usbConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName arg0, IBinder arg1) {
-            usbService = ((UsbService.UsbBinder) arg1).getService();
-            usbService.setHandler(mHandler);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-            usbService = null;
-        }
-    };
+    //private final ServiceConnection usbConnection = new ServiceConnection() {
+    //    @Override
+    //    public void onServiceConnected(ComponentName arg0, IBinder arg1) {
+    //        usbService = ((UsbService.UsbBinder) arg1).getService();
+    //        usbService.setHandler(mHandler);
+    //    }
+//
+    //    @Override
+    //    public void onServiceDisconnected(ComponentName arg0) {
+    //        usbService = null;
+    //    }
+    //};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_controller_1);
         //prevent UI to show up
         updateUI();
         //register the view model
         mSharedViewModel = ViewModelProviders.of(this).get(SharedViewModel.class);
 
-        mHandler = new MyHandler(this);
+        //mHandler = new MyHandler(this);
         mMsgSendHandler = new Handler();
         mRunnableCode = new MyRunnable(mAutoUpdateTimerInterval);
 
-        textViewTest = findViewById(R.id.textView_MainActivity_Test);
+        textViewTest = findViewById(R.id.textView_SignController_1_Test);
 
         setWidget();
 
@@ -120,15 +131,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateUI();
-        setFilters();  // Start listening notifications from UsbService
-        startService(UsbService.class, usbConnection, null); // Start UsbService(if it was not started before) and Bind it
+        setSerialDataReceiveFilter();
+        //setFilters();  // Start listening notifications from UsbService
+        //startService(UsbService.class, usbConnection, null); // Start UsbService(if it was not started before) and Bind it
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(mUsbReceiver);
-        unbindService(usbConnection);
+        unregisterReceiver(mSerialDataReceiver);
+        //unregisterReceiver(mUsbReceiver);
+        //unbindService(usbConnection);
     }
 
     @Override
@@ -198,17 +211,17 @@ public class MainActivity extends AppCompatActivity {
             //int r1 = new Random().nextInt(999) + 1;
             //int r2 = new Random().nextInt(999) + 1;
             String[] randomJackpotValues = new String[JACKPOT_QTY];
-            for (int n = 0; n < JACKPOT_QTY; n++){
+            for (int n = 0; n < JACKPOT_QTY; n++) {
                 int tempInt = new Random().nextInt(899) + 100;
                 randomJackpotValues[n] = String.valueOf(tempInt);
             }
             String[] randomMsgValues = new String[MSG_QTY];
-            for (int n = 0; n < JACKPOT_QTY; n++){
+            for (int n = 0; n < JACKPOT_QTY; n++) {
                 StringBuilder randomStringBuilder = new StringBuilder();
                 //int randomLength = new Random().nextInt(5);
                 String strCollection = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!$&*@#%,.";
                 char tempChar;
-                for (int i = 0; i < 5; i++){
+                for (int i = 0; i < 5; i++) {
                     //tempChar = (char) (new Random().nextInt(96) + 32);
                     tempChar = strCollection.charAt(new Random().nextInt(strCollection.length()));
                     randomStringBuilder.append(tempChar);
@@ -216,25 +229,39 @@ public class MainActivity extends AppCompatActivity {
                 randomMsgValues[n] = randomStringBuilder.toString();
             }
             String[] digitEffectCodes = new String[JACKPOT_QTY];
-            for (int x = 0; x < JACKPOT_QTY; x++){
-                digitEffectCodes[x] =  spinnerDigitEffectValues[x].getSelectedItem().toString();
+            for (int x = 0; x < JACKPOT_QTY; x++) {
+                digitEffectCodes[x] = spinnerDigitEffectValues[x].getSelectedItem().toString();
             }
 
             String[] msgEffectCodes = new String[MSG_QTY];
-            for (int y = 0; y < JACKPOT_QTY; y++){
-                msgEffectCodes[y] =  spinnerMsgEffectValues[y].getSelectedItem().toString();
+            for (int y = 0; y < JACKPOT_QTY; y++) {
+                msgEffectCodes[y] = spinnerMsgEffectValues[y].getSelectedItem().toString();
             }
 
             String data = buildProtocol(randomJackpotValues, digitEffectCodes, randomMsgValues, msgEffectCodes);
-            if (usbService != null) {
-                usbService.write(data.getBytes());
-                Toast.makeText(getApplicationContext(), "Sending: " + data, Toast.LENGTH_SHORT).show();
-                textViewTest.append(data + "\n");
-            }
+            //when usb service started in other activity, e.g. homeScreenActicity,
+            //use intent to carry extra method pass the data to other activity and
+            // write to serial by broadcast receiver in the usb service
+            sendDataToUsbServiceToWrite(data.getBytes());
+            Toast.makeText(getApplicationContext(), "Sending: " + data, Toast.LENGTH_SHORT).show();
+            textViewTest.append(data + "\n");
+
+            //when usb service started in this current activity, use following code to write to serial port directly
+            //if (usbService != null) {
+            //    usbService.write(data.getBytes());
+            //    Toast.makeText(getApplicationContext(), "Sending: " + data, Toast.LENGTH_SHORT).show();
+            //    textViewTest.append(data + "\n");
+            //}
             mMsgSendHandler.postDelayed(this, interval);
         }
     }
 
+    private void setSerialDataReceiveFilter()
+    {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(UsbService.ACTION_USB_DATA_RECEIVED);
+        registerReceiver(mSerialDataReceiver, intentFilter);
+    }
     //private Runnable mRunnableCode = new Runnable() {
     //    @Override
     //    public void run() {
@@ -250,56 +277,56 @@ public class MainActivity extends AppCompatActivity {
     //    }
     //};
 
-    private void startService(Class<?> service, ServiceConnection serviceConnection, Bundle extras) {
-        if (!UsbService.SERVICE_CONNECTED) {
-            Intent startService = new Intent(this, service);
-            if (extras != null && !extras.isEmpty()) {
-                Set<String> keys = extras.keySet();
-                for (String key : keys) {
-                    String extra = extras.getString(key);
-                    startService.putExtra(key, extra);
-                }
-            }
-            startService(startService);
-        }
-        Intent bindingIntent = new Intent(this, service);
-        bindService(bindingIntent, serviceConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    private void setFilters() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(UsbService.ACTION_USB_PERMISSION_GRANTED);
-        filter.addAction(UsbService.ACTION_NO_USB);
-        filter.addAction(UsbService.ACTION_USB_DISCONNECTED);
-        filter.addAction(UsbService.ACTION_USB_NOT_SUPPORTED);
-        filter.addAction(UsbService.ACTION_USB_PERMISSION_NOT_GRANTED);
-        registerReceiver(mUsbReceiver, filter);
-    }
-
-    private static class MyHandler extends Handler {
-        private final WeakReference<MainActivity> mActivity;
-
-        private MyHandler(MainActivity activity) {
-            mActivity = new WeakReference<>(activity);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case UsbService.MESSAGE_FROM_SERIAL_PORT:
-                    String data = (String) msg.obj;
-                    //mActivity.get().display.append(data);
-                    Toast.makeText(mActivity.get(), "Feedback: " + data, Toast.LENGTH_SHORT).show();
-                    break;
-                case UsbService.CTS_CHANGE:
-                    Toast.makeText(mActivity.get(), "CTS_CHANGE", Toast.LENGTH_LONG).show();
-                    break;
-                case UsbService.DSR_CHANGE:
-                    Toast.makeText(mActivity.get(), "DSR_CHANGE", Toast.LENGTH_LONG).show();
-                    break;
-            }
-        }
-    }
+    //private void startService(Class<?> service, ServiceConnection serviceConnection, Bundle extras) {
+    //    if (!UsbService.SERVICE_CONNECTED) {
+    //        Intent startService = new Intent(this, service);
+    //        if (extras != null && !extras.isEmpty()) {
+    //            Set<String> keys = extras.keySet();
+    //            for (String key : keys) {
+    //                String extra = extras.getString(key);
+    //                startService.putExtra(key, extra);
+    //            }
+    //        }
+    //        startService(startService);
+    //    }
+    //    Intent bindingIntent = new Intent(this, service);
+    //    bindService(bindingIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+    //}
+//
+    //private void setFilters() {
+    //    IntentFilter filter = new IntentFilter();
+    //    filter.addAction(UsbService.ACTION_USB_PERMISSION_GRANTED);
+    //    filter.addAction(UsbService.ACTION_NO_USB);
+    //    filter.addAction(UsbService.ACTION_USB_DISCONNECTED);
+    //    filter.addAction(UsbService.ACTION_USB_NOT_SUPPORTED);
+    //    filter.addAction(UsbService.ACTION_USB_PERMISSION_NOT_GRANTED);
+    //    registerReceiver(mUsbReceiver, filter);
+    //}
+//
+    //private static class MyHandler extends Handler {
+    //    private final WeakReference<SignController_1_Activity> mActivity;
+//
+    //    private MyHandler(SignController_1_Activity activity) {
+    //        mActivity = new WeakReference<>(activity);
+    //    }
+//
+    //    @Override
+    //    public void handleMessage(Message msg) {
+    //        switch (msg.what) {
+    //            case UsbService.MESSAGE_FROM_SERIAL_PORT:
+    //                String data = (String) msg.obj;
+    //                //mActivity.get().display.append(data);
+    //                Toast.makeText(mActivity.get(), "Feedback: " + data, Toast.LENGTH_SHORT).show();
+    //                break;
+    //            case UsbService.CTS_CHANGE:
+    //                Toast.makeText(mActivity.get(), "CTS_CHANGE", Toast.LENGTH_LONG).show();
+    //                break;
+    //            case UsbService.DSR_CHANGE:
+    //                Toast.makeText(mActivity.get(), "DSR_CHANGE", Toast.LENGTH_LONG).show();
+    //                break;
+    //        }
+    //    }
+    //}
 
     private String buildProtocol(String[] jackpotValues, String[] digitEffectCodeValues, String[] msgStrings, String[] msgEffectCodeValues) {
         String protocolStr = "";
@@ -312,20 +339,20 @@ public class MainActivity extends AppCompatActivity {
                 if (mMFCValue.equals("CM")) {
                     String[] tempDigitEffectCode = digitEffectCodeValues[i].split("-");
                     stringBuilderTempStr1.append("<W").append(i + 1).append("><").append(tempDigitEffectCode[0]).append(">").append(jackpotValues[i]);
-                }else{
+                } else {
                     String[] tempDigitEffectCode = digitEffectCodeValues[i].split("-");
                     stringBuilderTempStr1.append("<L").append(i + 1).append("><").append(tempDigitEffectCode[0]).append(">").append(jackpotValues[i]);
                 }
             }
             for (int j = 0; j < jackpotQty; j++) {
                 String[] tempMsgEffectCode = msgEffectCodeValues[j].split("-");
-                stringBuilderTempStr1.append("<M").append(j+1).append("><").append(tempMsgEffectCode[0]).append(">").append(msgStrings[j]);
+                stringBuilderTempStr1.append("<M").append(j + 1).append("><").append(tempMsgEffectCode[0]).append(">").append(msgStrings[j]);
             }
             if (mPEC1Value.contains("Null") || mPEC2Value.contains("Null")) {
                 String[] tempStateCode = mStateCodeValue.split("-");
                 protocolStr = "<" + mMFCValue + tempStateCode[1] + "LT>" + "<ID" + mSignIdValue + ">" +
                         stringBuilderTempStr1.toString() + stringBuilderTempStr2.toString() + "<E>";
-            }else{
+            } else {
                 String[] tempStr1 = mPEC1Value.split("-");
                 String[] tempStr2 = mPEC2Value.split("-");
                 protocolStr = "<" + mMFCValue + mStateCodeValue + "LT>" + "<ID" + mSignIdValue + ">" +
@@ -338,34 +365,36 @@ public class MainActivity extends AppCompatActivity {
 
     private void setWidget() {
         for (int i = 0; i < JACKPOT_QTY; i++) {
-            String str = "editText_MainActivity_Jackpot_Value_" + (i + 1);
+            String str = "editText_SignController_1_Jackpot_Value_" + (i + 1);
             int targetWidgetId = getResources().getIdentifier(str, "id", this.getPackageName());
             editTextJackpotValues[i] = findViewById(targetWidgetId);
         }
 
         for (int j = 0; j < MSG_QTY; j++) {
-            String str = "editText_MainActivity_Msg_Str_" + (j + 1);
+            String str = "editText_SignController_1_Msg_Str_" + (j + 1);
             int targetWidgetId = getResources().getIdentifier(str, "id", this.getPackageName());
             editTextMsgStrings[j] = findViewById(targetWidgetId);
         }
         spinnerSharedArrayAdapter = ArrayAdapter.createFromResource(this, R.array.digit_effect_code, android.R.layout.simple_spinner_item);
-        for (int x = 0; x < JACKPOT_QTY; x++){
-            String str = "spinner_MainActivity_DigitEffectCode_" + (x + 1);
+        for (int x = 0; x < JACKPOT_QTY; x++) {
+            String str = "spinner_SignController_1_DigitEffectCode_" + (x + 1);
             int targetWidgetId = getResources().getIdentifier(str, "id", this.getPackageName());
             spinnerDigitEffectValues[x] = findViewById(targetWidgetId);
             spinnerDigitEffectValues[x].setAdapter(spinnerSharedArrayAdapter);
             spinnerDigitEffectValues[x].setOnItemSelectedListener(new SharedOnItemSelected());
         }
-        for (int y = 0; y < MSG_QTY; y++){
-            String str = "spinner_MainActivity_MsgEffectCode_" + (y + 1);
+        for (int y = 0; y < MSG_QTY; y++) {
+            String str = "spinner_SignController_1_MsgEffectCode_" + (y + 1);
             int targetWidgetId = getResources().getIdentifier(str, "id", this.getPackageName());
             spinnerMsgEffectValues[y] = findViewById(targetWidgetId);
             spinnerMsgEffectValues[y].setAdapter(spinnerSharedArrayAdapter);
             spinnerMsgEffectValues[y].setOnItemSelectedListener(new SharedOnItemSelected());
         }
-        settingsButton = findViewById(R.id.button_MainActivity_Settings);
-        updateButton = findViewById(R.id.button_MainActivity_Update);
-        autoUpdateCheckBox = findViewById(R.id.checkBox_MainActivity_AutoUpdate);
+        settingsButton = findViewById(R.id.button_SignController_1_Settings);
+        updateButton = findViewById(R.id.button_SignController_1_Update);
+        autoUpdateCheckBox = findViewById(R.id.checkBox_SignController_1_AutoUpdate);
+        goHomebutton = findViewById(R.id.button_SignController_1_Home);
+        helpbutton = findViewById(R.id.button_SignController_1_Help);
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -404,31 +433,33 @@ public class MainActivity extends AppCompatActivity {
                 if (!autoUpdateCheckBox.isChecked()) {
                     updateButton.setText(R.string.manual_update);
                     //String[] mCurrentJackpotValueArray = new String[JACKPOT_QTY];
-                    for (int n = 0; n < JACKPOT_QTY; n++){
+                    for (int n = 0; n < JACKPOT_QTY; n++) {
                         mCurrentJackpotValueArray[n] = editTextJackpotValues[n].getText().toString();
                     }
                     //String[] mCurrentMsgValueArray = new String[MSG_QTY];
-                    for (int n = 0; n < JACKPOT_QTY; n++){
+                    for (int n = 0; n < JACKPOT_QTY; n++) {
                         mCurrentMsgValueArray[n] = editTextMsgStrings[n].getText().toString();
                     }
                     //String[] mCurrentDigitEffectCodeArray = new String[JACKPOT_QTY];
-                    for (int x = 0; x < JACKPOT_QTY; x++){
-                        mCurrentDigitEffectCodeArray[x] =  spinnerDigitEffectValues[x].getSelectedItem().toString();
+                    for (int x = 0; x < JACKPOT_QTY; x++) {
+                        mCurrentDigitEffectCodeArray[x] = spinnerDigitEffectValues[x].getSelectedItem().toString();
                     }
                     //String[] mCurrentMsgEffectCodeArray = new String[MSG_QTY];
-                    for (int y = 0; y < JACKPOT_QTY; y++){
-                        mCurrentMsgEffectCodeArray[y] =  spinnerMsgEffectValues[y].getSelectedItem().toString();
+                    for (int y = 0; y < JACKPOT_QTY; y++) {
+                        mCurrentMsgEffectCodeArray[y] = spinnerMsgEffectValues[y].getSelectedItem().toString();
                     }
                     String data = buildProtocol(mCurrentJackpotValueArray, mCurrentDigitEffectCodeArray, mCurrentMsgValueArray, mCurrentMsgEffectCodeArray);
                     textViewTest.setText(data);
-                    if (usbService != null) {
-                        usbService.write(data.getBytes());
-                        Toast.makeText(getApplicationContext(), "Sending: " + data, Toast.LENGTH_SHORT).show();
-                    }
-                    //if (updateButton.getText().equals(R.string.manual_update)) {
-                    //    updateButton.setText(R.string.stop);
-                    //} else {
-                    //    updateButton.setText(R.string.manual_update);
+                    //when usb service started in other activity, e.g. homeScreenActicity,
+                    //use intent to carry extra method pass the data to other activity and
+                    // write to serial by broadcast receiver in the usb service
+                    sendDataToUsbServiceToWrite(data.getBytes());
+                    Toast.makeText(getApplicationContext(), "Sending: " + data, Toast.LENGTH_SHORT).show();
+
+                    //when usb service started in this current activity, use following code to write to serial port directly
+                    //if (usbService != null) {
+                    //    usbService.write(data.getBytes());
+                    //    Toast.makeText(getApplicationContext(), "Sending: " + data, Toast.LENGTH_SHORT).show();
                     //}
                 } else {
                     if (updateButton.getText().equals(getResources().getString(R.string.auto_update))) {
@@ -441,6 +472,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        goHomebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignController_1_Activity.this, HomeScreenActivity.class));
+                finish();
+            }
+        });
+
+
     }
 
     class SharedOnItemSelected implements AdapterView.OnItemSelectedListener {
@@ -448,21 +489,21 @@ public class MainActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             Spinner targetSpinner = (Spinner) adapterView;
             String[] tempStr = targetSpinner.getItemAtPosition(i).toString().split("-");
-            if (targetSpinner.getId() == R.id.spinner_MainActivity_DigitEffectCode_1) {
+            if (targetSpinner.getId() == R.id.spinner_SignController_1_DigitEffectCode_1) {
                 mCurrentDigitEffectCodeArray[0] = tempStr[0];
-            } else if (targetSpinner.getId() == R.id.spinner_MainActivity_DigitEffectCode_2) {
+            } else if (targetSpinner.getId() == R.id.spinner_SignController_1_DigitEffectCode_2) {
                 mCurrentDigitEffectCodeArray[1] = tempStr[0];
-            } else if (targetSpinner.getId() == R.id.spinner_MainActivity_DigitEffectCode_3) {
+            } else if (targetSpinner.getId() == R.id.spinner_SignController_1_DigitEffectCode_3) {
                 mCurrentDigitEffectCodeArray[2] = tempStr[0];
-            } else if (targetSpinner.getId() == R.id.spinner_MainActivity_DigitEffectCode_4) {
+            } else if (targetSpinner.getId() == R.id.spinner_SignController_1_DigitEffectCode_4) {
                 mCurrentDigitEffectCodeArray[3] = tempStr[0];
-            } else if (targetSpinner.getId() == R.id.spinner_MainActivity_MsgEffectCode_1) {
+            } else if (targetSpinner.getId() == R.id.spinner_SignController_1_MsgEffectCode_1) {
                 mCurrentMsgEffectCodeArray[0] = tempStr[0];
-            } else if (targetSpinner.getId() == R.id.spinner_MainActivity_MsgEffectCode_2) {
+            } else if (targetSpinner.getId() == R.id.spinner_SignController_1_MsgEffectCode_2) {
                 mCurrentMsgEffectCodeArray[1] = tempStr[0];
-            } else if (targetSpinner.getId() == R.id.spinner_MainActivity_MsgEffectCode_3) {
+            } else if (targetSpinner.getId() == R.id.spinner_SignController_1_MsgEffectCode_3) {
                 mCurrentMsgEffectCodeArray[2] = tempStr[0];
-            } else if (targetSpinner.getId() == R.id.spinner_MainActivity_MsgEffectCode_4) {
+            } else if (targetSpinner.getId() == R.id.spinner_SignController_1_MsgEffectCode_4) {
                 mCurrentMsgEffectCodeArray[3] = tempStr[0];
             }
         }
@@ -522,5 +563,12 @@ public class MainActivity extends AppCompatActivity {
         mSignIdValue = sharedPreferences.getString(SettingsFragment.SIGN_ID, "000001");
         mPEC1Value = sharedPreferences.getString(SettingsFragment.PANEL_EFFECT_CODE_1, "Null-No panel effect code");
         mPEC2Value = sharedPreferences.getString(SettingsFragment.PANEL_EFFECT_CODE_2, "Null-No panel effect code");
+    }
+
+    private void sendDataToUsbServiceToWrite(byte[] data) {
+        Intent writeSerialIntent = new Intent();
+        writeSerialIntent.putExtra(UsbService.SERIAL_DATA_READY_TO_SEND, data);
+        writeSerialIntent.setAction(UsbService.ACTION_USB_HAS_DATA_TO_SEND);
+        sendBroadcast(writeSerialIntent);
     }
 }

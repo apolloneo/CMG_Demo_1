@@ -36,6 +36,11 @@ public class UsbService extends Service {
     public static final String ACTION_USB_DISCONNECTED = "com.felhr.usbservice.USB_DISCONNECTED";
     public static final String ACTION_CDC_DRIVER_NOT_WORKING = "com.felhr.connectivityservices.ACTION_CDC_DRIVER_NOT_WORKING";
     public static final String ACTION_USB_DEVICE_NOT_WORKING = "com.felhr.connectivityservices.ACTION_USB_DEVICE_NOT_WORKING";
+    public static final String ACTION_USB_HAS_DATA_TO_SEND = "com.bchen.usbservice.ACTION_USB_HAS_DATA_TO_SEND";
+    public static final String ACTION_USB_DATA_RECEIVED = "com.bchen.usbservice.ACTION_USB_DATA_RECEIVED";
+    public static final String SERIAL_DATA_READY_TO_SEND = "com.bchen.serial.SERIAL_DATA_READY_TO_SEND";
+    public static final String SERIAL_DATA_RECEIVED = "com.bchen.serial.SERIAL_DATA_RECEIVED";
+
     public static final int MESSAGE_FROM_SERIAL_PORT = 0;
     public static final int CTS_CHANGE = 1;
     public static final int DSR_CHANGE = 2;
@@ -63,8 +68,11 @@ public class UsbService extends Service {
         public void onReceivedData(byte[] arg0) {
             try {
                 String data = new String(arg0, "UTF-8");
-                if (mHandler != null)
+                if (mHandler != null) {
                     mHandler.obtainMessage(MESSAGE_FROM_SERIAL_PORT, data).sendToTarget();
+                }
+                //here using the broadcast receiver mechanism to send received data to other activity
+                broadcastDataReceivedFromSerial(data.getBytes());
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -128,6 +136,21 @@ public class UsbService extends Service {
     };
 
     /*
+     * This broadcast receiver will handle the serial write data from other activities pass into
+     */
+    private final BroadcastReceiver writeSerialDataReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            if (action.equals(ACTION_USB_HAS_DATA_TO_SEND)){
+                byte[] data = intent.getByteArrayExtra(SERIAL_DATA_READY_TO_SEND);
+                write(data);
+            }
+        }
+    };
+
+    /*
      * onCreate will be executed when service is started. It configures an IntentFilter to listen for
      * incoming Intents (USB ATTACHED, USB DETACHED...) and it tries to open a serial port.
      */
@@ -136,7 +159,8 @@ public class UsbService extends Service {
         this.context = this;
         serialPortConnected = false;
         UsbService.SERVICE_CONNECTED = true;
-        setFilter();
+        setUsbServiceConnectFilter();
+        setSerialDataWriteFilter();
         usbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
         findSerialPortDevice();
     }
@@ -164,11 +188,12 @@ public class UsbService extends Service {
             e.printStackTrace();
         }
         unregisterReceiver(usbReceiver);
+        unregisterReceiver(writeSerialDataReceiver);
         UsbService.SERVICE_CONNECTED = false;
     }
 
     /*
-     * This function will be called from MainActivity to write data through Serial Port
+     * This function will be called from SignController_1_Activity to write data through Serial Port
      */
     public void write(byte[] data) {
         if (serialPort != null)
@@ -210,19 +235,25 @@ public class UsbService extends Service {
                 }
             }
             if (device==null) {
-                // There are no USB devices connected (but usb host were listed). Send an intent to MainActivity.
+                // There are no USB devices connected (but usb host were listed). Send an intent to SignController_1_Activity.
                 Intent intent = new Intent(ACTION_NO_USB);
                 sendBroadcast(intent);
             }
         } else {
             Log.d(TAG, "findSerialPortDevice() usbManager returned empty device list." );
-            // There is no USB devices connected. Send an intent to MainActivity
+            // There is no USB devices connected. Send an intent to SignController_1_Activity
             Intent intent = new Intent(ACTION_NO_USB);
             sendBroadcast(intent);
         }
     }
 
-    private void setFilter() {
+    private void setSerialDataWriteFilter(){
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ACTION_USB_HAS_DATA_TO_SEND);
+        registerReceiver(writeSerialDataReceiver, intentFilter);
+    }
+
+    private void setUsbServiceConnectFilter() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_USB_PERMISSION);
         filter.addAction(ACTION_USB_DETACHED);
@@ -276,7 +307,7 @@ public class UsbService extends Service {
                     // to be uploaded or not
                     //Thread.sleep(2000); // sleep some. YMMV with different chips.
                     
-                    // Everything went as expected. Send an intent to MainActivity
+                    // Everything went as expected. Send an intent to SignController_1_Activity
                     Intent intent = new Intent(ACTION_USB_READY);
                     context.sendBroadcast(intent);
                 } else {
@@ -296,5 +327,12 @@ public class UsbService extends Service {
                 context.sendBroadcast(intent);
             }
         }
+    }
+
+    private void broadcastDataReceivedFromSerial(byte [] dataRecived){
+        Intent intent = new Intent();
+        intent.putExtra(SERIAL_DATA_RECEIVED, dataRecived);
+        intent.setAction(ACTION_USB_DATA_RECEIVED);
+        sendBroadcast(intent);
     }
 }
