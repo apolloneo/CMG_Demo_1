@@ -17,6 +17,9 @@
     <string name="msg_display_default_value_2">ABCDE</string>
     <string name="home_button_caption">HOME</string>
     <string name="help_button_caption">HELP</string>
+    <string name="home_screen_disclaimer">IMPORTANT: At this time you need to plug the transmitter into the USB port on the side of the tablet.\n\Select the icon representing the sign you want to update below.</string>
+    <string name="footer">Tablet is Property of CM Global\n\1201 N 4th Street, Watertown, WI 53098 | 920-567-0333 | www.CMGlobal.com</string>
+    <string name="instruction_1"> Instructions: \n\1. IMPORTANT: Plug the sign’s transmitter into the USB port on the side of the tablet \n\2. Select the eld below you want to manually update and enter desired values, or check RANDOM UPDATE below. \n\3. Tap TRANSMIT to update sign</string>
 
     <string-array name="digit_effect_code">
         <item>FS-Static</item>

@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.util.Random;
 import java.util.Set;
@@ -62,7 +63,13 @@ public class SignController_1_Activity extends AppCompatActivity {
             try {
                 if (action.equals(UsbService.ACTION_USB_DATA_RECEIVED)) {
                     byte[] dataReceived = intent.getExtras().getByteArray(UsbService.SERIAL_DATA_RECEIVED);
-                    Toast.makeText(getApplicationContext(), "Serial Data Received: " + dataReceived.toString(), Toast.LENGTH_SHORT).show();
+                    String readableData = null;
+                    try {
+                        readableData = new String(dataReceived,"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(getApplicationContext(), "Serial Data Received: " + readableData, Toast.LENGTH_SHORT).show();
                 }
             }catch (NullPointerException e) {
                 e.printStackTrace();

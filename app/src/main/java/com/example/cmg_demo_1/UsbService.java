@@ -247,6 +247,7 @@ public class UsbService extends Service {
         }
     }
 
+    //receive data from other activity
     private void setSerialDataWriteFilter(){
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ACTION_USB_HAS_DATA_TO_SEND);

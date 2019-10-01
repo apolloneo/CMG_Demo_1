@@ -9,9 +9,7 @@
     </style>
 
     <style name="HomeScreenActivity" parent="Theme.AppCompat.Light.NoActionBar">
-        <!--
-        <item name="android:windowBackground">@drawable/background_spashscreen</item>
-        -->
+        <item name="android:windowBackground">@color/homeScreenBackground</item>
     </style>
 
     <style name="SegmentDisplay">

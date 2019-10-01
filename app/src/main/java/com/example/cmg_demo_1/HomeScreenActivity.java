@@ -189,7 +189,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                 case UsbService.MESSAGE_FROM_SERIAL_PORT:
                     String data = (String) msg.obj;
                     //mActivity.get().display.append(data);
-                    Toast.makeText(mActivity.get(), "Feedback: " + data, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mActivity.get(), "Feedback: " + data, Toast.LENGTH_SHORT).show();
                     break;
                 case UsbService.CTS_CHANGE:
                     Toast.makeText(mActivity.get(), "CTS_CHANGE", Toast.LENGTH_LONG).show();

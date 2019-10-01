@@ -5,18 +5,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/homeScreenBackground"
     tools:context=".HomeScreenActivity">
+
+    <ImageView
+        android:id="@+id/imageView_HomeScreen_MainLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/cmglogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView_HomeScreen_Disclaimer"/>
+
+    <TextView
+        android:id="@+id/textView_HomeScreen_Disclaimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:gravity="center"
+        android:text="@string/home_screen_disclaimer"
+        android:textSize="22sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_HomeScreen_MainLogo" />
 
     <Button
         android:id="@+id/btn_HomeScreen_ToSignController1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
         android:layout_marginStart="128dp"
+        android:layout_marginBottom="128dp"
+        android:background="@color/homeScreenBackground"
+        android:drawableTop="@drawable/ic_4game_vending_jp_icon"
+        android:fontFamily="@font/myriad_pro_regular"
         android:text="VEND JACKPOT SIGN"
-        android:drawableTop="@drawable/ic_launcher_foreground"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:text="@string/footer"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 
 
