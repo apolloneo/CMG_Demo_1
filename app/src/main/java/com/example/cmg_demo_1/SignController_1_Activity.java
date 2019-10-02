@@ -1,6 +1,7 @@
 package com.example.cmg_demo_1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.Group;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -30,7 +31,7 @@ import java.util.Set;
 
 public class SignController_1_Activity extends AppCompatActivity {
     //widgets
-    Button updateButton, goHomebutton, helpbutton;
+    Button updateButton, goHomebutton, helpbutton, backbutton;
     ImageButton settingsButton;
     CheckBox autoUpdateCheckBox;
     TextView textViewTest;
@@ -38,6 +39,7 @@ public class SignController_1_Activity extends AppCompatActivity {
     EditText[] editTextMsgStrings = new EditText[MSG_QTY];
     Spinner[] spinnerDigitEffectValues = new Spinner[JACKPOT_QTY];
     Spinner[] spinnerMsgEffectValues = new Spinner[MSG_QTY];
+    Group signCtrl_1_Hidden_Group, help_Page_Group;
 
     //vars
     private static final int JACKPOT_QTY = 4;
@@ -404,6 +406,9 @@ public class SignController_1_Activity extends AppCompatActivity {
         autoUpdateCheckBox = findViewById(R.id.checkBox_SignController_1_AutoUpdate);
         goHomebutton = findViewById(R.id.button_SignController_1_Home);
         helpbutton = findViewById(R.id.button_SignController_1_Help);
+        backbutton = findViewById(R.id.button_Help_Back);
+        signCtrl_1_Hidden_Group =findViewById(R.id.group_SignController_1_Hide);
+        help_Page_Group = findViewById(R.id.group_Help_Page);
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -490,7 +495,23 @@ public class SignController_1_Activity extends AppCompatActivity {
             }
         });
 
+        helpbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                settingsButton.setEnabled(false);
+                help_Page_Group.setVisibility(View.VISIBLE);
+                signCtrl_1_Hidden_Group.setVisibility(View.GONE);
+            }
+        });
 
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signCtrl_1_Hidden_Group.setVisibility(View.VISIBLE);
+                help_Page_Group.setVisibility(View.GONE);
+                settingsButton.setEnabled(true);
+            }
+        });
     }
 
     class SharedOnItemSelected implements AdapterView.OnItemSelectedListener {
