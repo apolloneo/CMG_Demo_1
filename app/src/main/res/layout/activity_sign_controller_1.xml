@@ -32,6 +32,7 @@
         android:layout_marginStart="64dp"
         android:text="@string/instruction_1"
         android:textColor="@android:color/black"
+        android:textSize="16sp"
         android:fontFamily="@font/myriad_pro_regular"
         app:layout_constraintTop_toBottomOf="@+id/textView_SignController_1_Banner"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,37 +52,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_SignController_1_MsgEffectCode_1" />
 
+    <TextView
+        android:id="@+id/textView_SignController_1_A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/game_1_title"
+        android:textSize="64sp"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        android:fontFamily="@font/myriad_pro_bold"
+        app:layout_constraintBottom_toTopOf="@id/editText_SignController_1_Jackpot_Value_1"
+        app:layout_constraintStart_toStartOf="@id/editText_SignController_1_Jackpot_Value_1"
+        app:layout_constraintEnd_toEndOf="@id/editText_SignController_1_Jackpot_Value_1"/>
+
+
     <EditText
         style="@style/SegmentDisplay"
         android:id="@+id/editText_SignController_1_Jackpot_Value_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="90dp"
         android:layout_marginTop="300dp"
+        android:layout_marginStart="32dp"
         android:text="@string/digit_display_default_value_888"
-        android:textSize="64sp"
+        android:textSize="80sp"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/editText_SignController_1_Jackpot_Value_2"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Spinner
         android:id="@+id/spinner_SignController_1_DigitEffectCode_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="16sp"
         app:layout_constraintStart_toStartOf="@id/editText_SignController_1_Jackpot_Value_1"
         app:layout_constraintEnd_toEndOf="@id/editText_SignController_1_Jackpot_Value_1"
         app:layout_constraintTop_toBottomOf="@id/editText_SignController_1_Jackpot_Value_1"/>
 
     <EditText
-        style="@style/MsgDisplay"
         android:id="@+id/editText_SignController_1_Msg_Str_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        style="@style/MsgDisplay"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
         android:text="@string/msg_display_default_value_1"
-        android:textSize="32dp"
-        app:layout_constraintStart_toStartOf="@+id/editText_SignController_1_Jackpot_Value_1"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="@+id/editText_SignController_1_Jackpot_Value_1"
-        app:layout_constraintTop_toBottomOf="@id/spinner_SignController_1_DigitEffectCode_1"/>
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/editText_SignController_1_Jackpot_Value_1"
+        app:layout_constraintTop_toBottomOf="@id/spinner_SignController_1_DigitEffectCode_1" />
 
     <Spinner
         android:id="@+id/spinner_SignController_1_MsgEffectCode_1"
@@ -92,15 +111,37 @@
         app:layout_constraintEnd_toEndOf="@id/editText_SignController_1_Jackpot_Value_1"
         app:layout_constraintTop_toBottomOf="@id/editText_SignController_1_Msg_Str_1"/>
 
+    <View
+        style="@style/Divider.Vertical"
+        android:id="@+id/divider_1"
+        app:layout_constraintStart_toEndOf="@id/editText_SignController_1_Jackpot_Value_1"
+        app:layout_constraintEnd_toStartOf="@id/editText_SignController_1_Jackpot_Value_2"
+        app:layout_constraintTop_toTopOf="@id/editText_SignController_1_Jackpot_Value_1"
+        app:layout_constraintBottom_toBottomOf="@id/editText_SignController_1_Msg_Str_1"/>
+
+    <TextView
+        android:id="@+id/textView_SignController_1_B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/game_2_title"
+        android:textSize="64sp"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        android:fontFamily="@font/myriad_pro_bold"
+        app:layout_constraintBottom_toTopOf="@id/editText_SignController_1_Jackpot_Value_2"
+        app:layout_constraintStart_toStartOf="@id/editText_SignController_1_Jackpot_Value_2"
+        app:layout_constraintEnd_toEndOf="@id/editText_SignController_1_Jackpot_Value_2"/>
+
     <EditText
         style="@style/SegmentDisplay"
         android:id="@+id/editText_SignController_1_Jackpot_Value_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="90dp"
         android:layout_marginTop="300dp"
         android:text="@string/digit_display_default_value_888"
-        android:textSize="64sp"
+        android:textSize="80sp"
         app:layout_constraintStart_toEndOf="@id/editText_SignController_1_Jackpot_Value_1"
+        app:layout_constraintEnd_toStartOf="@id/editText_SignController_1_Jackpot_Value_3"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Spinner
@@ -115,11 +156,11 @@
     <EditText
         style="@style/MsgDisplay"
         android:id="@+id/editText_SignController_1_Msg_Str_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
         android:text="@string/msg_display_default_value_2"
-        android:textSize="32dp"
+        android:textSize="48sp"
         app:layout_constraintStart_toStartOf="@+id/editText_SignController_1_Jackpot_Value_2"
         app:layout_constraintEnd_toEndOf="@+id/editText_SignController_1_Jackpot_Value_2"
         app:layout_constraintTop_toBottomOf="@id/spinner_SignController_1_DigitEffectCode_2"/>
@@ -133,15 +174,37 @@
         app:layout_constraintEnd_toEndOf="@id/editText_SignController_1_Jackpot_Value_2"
         app:layout_constraintTop_toBottomOf="@id/editText_SignController_1_Msg_Str_2"/>
 
+    <View
+        style="@style/Divider.Vertical"
+        android:id="@+id/divider_2"
+        app:layout_constraintStart_toEndOf="@id/editText_SignController_1_Jackpot_Value_2"
+        app:layout_constraintEnd_toStartOf="@id/editText_SignController_1_Jackpot_Value_3"
+        app:layout_constraintTop_toTopOf="@id/editText_SignController_1_Jackpot_Value_2"
+        app:layout_constraintBottom_toBottomOf="@id/editText_SignController_1_Msg_Str_2"/>
+
+    <TextView
+        android:id="@+id/textView_SignController_1_C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/game_3_title"
+        android:textSize="64sp"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        android:fontFamily="@font/myriad_pro_bold"
+        app:layout_constraintBottom_toTopOf="@id/editText_SignController_1_Jackpot_Value_3"
+        app:layout_constraintStart_toStartOf="@id/editText_SignController_1_Jackpot_Value_3"
+        app:layout_constraintEnd_toEndOf="@id/editText_SignController_1_Jackpot_Value_3"/>
+
     <EditText
         style="@style/SegmentDisplay"
         android:id="@+id/editText_SignController_1_Jackpot_Value_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="90dp"
         android:layout_marginTop="300dp"
         android:text="@string/digit_display_default_value_888"
-        android:textSize="64sp"
+        android:textSize="80sp"
         app:layout_constraintStart_toEndOf="@id/editText_SignController_1_Jackpot_Value_2"
+        app:layout_constraintEnd_toStartOf="@id/editText_SignController_1_Jackpot_Value_4"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Spinner
@@ -156,11 +219,11 @@
     <EditText
         style="@style/MsgDisplay"
         android:id="@+id/editText_SignController_1_Msg_Str_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
         android:text="@string/msg_display_default_value_1"
-        android:textSize="32dp"
+        android:textSize="48sp"
         app:layout_constraintStart_toStartOf="@+id/editText_SignController_1_Jackpot_Value_3"
         app:layout_constraintEnd_toEndOf="@+id/editText_SignController_1_Jackpot_Value_3"
         app:layout_constraintTop_toBottomOf="@id/spinner_SignController_1_DigitEffectCode_3"/>
@@ -174,16 +237,38 @@
         app:layout_constraintEnd_toEndOf="@id/editText_SignController_1_Jackpot_Value_3"
         app:layout_constraintTop_toBottomOf="@id/editText_SignController_1_Msg_Str_3"/>
 
+    <View
+        style="@style/Divider.Vertical"
+        android:id="@+id/divider_3"
+        app:layout_constraintStart_toEndOf="@id/editText_SignController_1_Jackpot_Value_3"
+        app:layout_constraintEnd_toStartOf="@id/editText_SignController_1_Jackpot_Value_4"
+        app:layout_constraintTop_toTopOf="@id/editText_SignController_1_Jackpot_Value_3"
+        app:layout_constraintBottom_toBottomOf="@id/editText_SignController_1_Msg_Str_3"/>
+
+    <TextView
+        android:id="@+id/textView_SignController_1_D"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/game_4_title"
+        android:textSize="64sp"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        android:fontFamily="@font/myriad_pro_bold"
+        app:layout_constraintBottom_toTopOf="@id/editText_SignController_1_Jackpot_Value_4"
+        app:layout_constraintStart_toStartOf="@id/editText_SignController_1_Jackpot_Value_4"
+        app:layout_constraintEnd_toEndOf="@id/editText_SignController_1_Jackpot_Value_4"/>
 
     <EditText
         style="@style/SegmentDisplay"
         android:id="@+id/editText_SignController_1_Jackpot_Value_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="90dp"
         android:layout_marginTop="300dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/digit_display_default_value_888"
-        android:textSize="64sp"
+        android:textSize="80sp"
         app:layout_constraintStart_toEndOf="@id/editText_SignController_1_Jackpot_Value_3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Spinner
@@ -199,11 +284,11 @@
     <EditText
         style="@style/MsgDisplay"
         android:id="@+id/editText_SignController_1_Msg_Str_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
         android:text="@string/msg_display_default_value_2"
-        android:textSize="32dp"
+        android:textSize="48sp"
         app:layout_constraintStart_toStartOf="@+id/editText_SignController_1_Jackpot_Value_4"
         app:layout_constraintEnd_toEndOf="@+id/editText_SignController_1_Jackpot_Value_4"
         app:layout_constraintTop_toBottomOf="@id/spinner_SignController_1_DigitEffectCode_4"/>
@@ -221,47 +306,77 @@
         android:id="@+id/checkBox_SignController_1_AutoUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/auto_update"
-        app:layout_constraintBottom_toTopOf="@+id/button_SignController_1_Update"
-        app:layout_constraintEnd_toEndOf="@+id/button_SignController_1_Update" />
+        android:fontFamily="@font/myriad_pro_regular"
+        app:layout_constraintBottom_toTopOf="@+id/button_SignController_1_Settings"
+        app:layout_constraintStart_toStartOf="@id/button_SignController_1_Settings" />
 
     <Button
         android:id="@+id/button_SignController_1_Update"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="128dp"
+        android:background="@drawable/btn_rounded_corner_green_r16dp"
+        android:fontFamily="@font/myriad_pro_regular"
         android:text="@string/manual_update"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button_SignController_1_Settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SETTINGS"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@null"
+        android:src="@drawable/ic_cmglogo_test_200x79"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
         android:id="@+id/button_SignController_1_Home"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/home_button_caption"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:background="@drawable/btn_rounded_corner_red_r16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/button_SignController_1_Help"/>
 
     <Button
         android:id="@+id/button_SignController_1_Help"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/help_button_caption"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:background="@drawable/btn_rounded_corner_navy_r16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:text="@string/help_button_caption"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:fontFamily="@font/myriad_pro_regular"
+        android:text="@string/footer"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

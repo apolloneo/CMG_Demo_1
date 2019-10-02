@@ -12,7 +12,7 @@
         android:id="@+id/imageView_HomeScreen_MainLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="90dp"
         android:src="@drawable/cmglogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,18 +36,44 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView_HomeScreen_MainLogo" />
 
     <Button
-        android:id="@+id/btn_HomeScreen_ToSignController1"
+        android:visibility="gone"
+        android:id="@+id/btn_HomeScreen_ToSignController2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="128dp"
         android:layout_marginBottom="128dp"
         android:background="@color/homeScreenBackground"
         android:drawableTop="@drawable/ic_4game_vending_jp_icon"
+        android:drawablePadding="5dp"
         android:fontFamily="@font/myriad_pro_regular"
-        android:text="VEND JACKPOT SIGN"
+        android:text="@string/sign_controller_1_app_name"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_HomeScreen_ToSignController1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginBottom="256dp"
+        android:background="@drawable/btn_rounded_corner_red_r16dp"
+        android:src="@drawable/ic_4game_vending_jp_icon"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_HomeScreen_ToSignController1_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/sign_controller_1_app_name"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/myriad_pro_regular"
+        app:layout_constraintTop_toBottomOf="@id/btn_HomeScreen_ToSignController1"
+        app:layout_constraintStart_toStartOf="@id/btn_HomeScreen_ToSignController1"
+        app:layout_constraintEnd_toEndOf="@id/btn_HomeScreen_ToSignController1"/>
 
     <TextView
         android:layout_width="wrap_content"

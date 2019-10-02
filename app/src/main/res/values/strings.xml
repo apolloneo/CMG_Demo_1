@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">CMG_Demo_1</string>
-    <string name="manual_update">MANUAL UPDATE</string>
-    <string name="auto_update">AUTO UPDATE</string>
+    <string name="manual_update">TRANSMIT</string>
+    <string name="auto_update"><font size = '20'>RANDOM UPDATE</font> \n\Note: only one sign can be updated at a time randomly</string>
     <string name="stop">STOP</string>
     <string name="cmg_settings_title">CM GLOBAL SIGN SETTINGS</string>
     <string name="select_manufacturer_code_title">Select Manufacturer Code:</string>
@@ -18,8 +18,13 @@
     <string name="home_button_caption">HOME</string>
     <string name="help_button_caption">HELP</string>
     <string name="home_screen_disclaimer">IMPORTANT: At this time you need to plug the transmitter into the USB port on the side of the tablet.\n\Select the icon representing the sign you want to update below.</string>
-    <string name="footer">Tablet is Property of CM Global\n\1201 N 4th Street, Watertown, WI 53098 | 920-567-0333 | www.CMGlobal.com</string>
-    <string name="instruction_1"> Instructions: \n\1. IMPORTANT: Plug the sign’s transmitter into the USB port on the side of the tablet \n\2. Select the eld below you want to manually update and enter desired values, or check RANDOM UPDATE below. \n\3. Tap TRANSMIT to update sign</string>
+    <string name="footer">Tablet is Property of CM Global\n\1201 N 4th Street, Watertown, WI 53098 | 920&#8211;567&#8211;0333 | www.CMGlobal.com</string>
+    <string name="instruction_1"> Instructions: \n\1.<font color = '#ff0000'> IMPORTANT:</font> Plug the sign’s transmitter into the USB port on the side of the tablet \n\2. Select the eld below you want to manually update and enter desired values, or check RANDOM UPDATE below. \n\3. Tap TRANSMIT to update sign</string>
+    <string name="sign_controller_1_app_name">VEND JACKPOT SIGN</string>
+    <string name="game_1_title">A</string>
+    <string name="game_2_title">B</string>
+    <string name="game_3_title">C</string>
+    <string name="game_4_title">D</string>
 
     <string-array name="digit_effect_code">
         <item>FS-Static</item>

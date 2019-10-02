@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +30,8 @@ import java.util.Set;
 
 public class SignController_1_Activity extends AppCompatActivity {
     //widgets
-    Button updateButton, settingsButton, goHomebutton, helpbutton;
+    Button updateButton, goHomebutton, helpbutton;
+    ImageButton settingsButton;
     CheckBox autoUpdateCheckBox;
     TextView textViewTest;
     EditText[] editTextJackpotValues = new EditText[JACKPOT_QTY];

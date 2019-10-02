@@ -12,6 +12,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +44,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         }
     };
     //Widgets
-    Button btnSignController1;
+    ImageButton btnSignController1;
 
     //vars
     private UsbService usbService;
