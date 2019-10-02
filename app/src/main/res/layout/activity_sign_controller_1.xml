@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     tools:context=".SignController_1_Activity">
 
     <androidx.constraintlayout.widget.Group
@@ -49,6 +50,7 @@
 
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/textView_SignController_1_Test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -388,9 +390,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <!--
+        tools:visibility="visible"-->
     <androidx.constraintlayout.widget.Group
         android:visibility="gone"
-        tools:visibility="visible"
         android:id="@+id/group_Help_Page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

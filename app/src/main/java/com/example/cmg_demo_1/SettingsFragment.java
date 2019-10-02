@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -84,6 +85,19 @@ public class SettingsFragment extends DialogFragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            getDialog().getWindow().setLayout(
+                    getResources().getDisplayMetrics().widthPixels,
+                    getResources().getDisplayMetrics().heightPixels
+            );
+        }catch (NullPointerException e){
+            Log.e("SettingsFragment", e.getMessage());
+        }
+    }
+
     private void setWidget(View v) {
         spinner_StateCode = v.findViewById(R.id.spinner_Settings_StateCode_Value);
         spinner_PEC_1 = v.findViewById(R.id.spinner_Settings_PEC_1_Value);
@@ -93,16 +107,16 @@ public class SettingsFragment extends DialogFragment {
         button_Confirm = v.findViewById(R.id.button_Settings_Confirm);
         button_Cancel = v.findViewById(R.id.button_Settings_Cancel);
 
-        stateCodeOptionsAdapter = ArrayAdapter.createFromResource(getContext(), R.array.state_code, android.R.layout.simple_spinner_item);
+        stateCodeOptionsAdapter = ArrayAdapter.createFromResource(getContext(), R.array.state_code, R.layout.spinner_item_layout_settings);
         //stateCodeOptionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_StateCode.setAdapter(stateCodeOptionsAdapter);
         spinner_StateCode.setSelection(0);
 
-        panelEffectCode1OptionsAdapter = ArrayAdapter.createFromResource(getContext(), R.array.panel_effect_code_1, android.R.layout.simple_spinner_item);
+        panelEffectCode1OptionsAdapter = ArrayAdapter.createFromResource(getContext(), R.array.panel_effect_code_1, R.layout.spinner_item_layout_settings);
         spinner_PEC_1.setAdapter(panelEffectCode1OptionsAdapter);
         spinner_PEC_1.setSelection(0);
 
-        panelEffectCode2OptionsAdapter = ArrayAdapter.createFromResource(getContext(), R.array.panel_effect_code_2, android.R.layout.simple_spinner_item);
+        panelEffectCode2OptionsAdapter = ArrayAdapter.createFromResource(getContext(), R.array.panel_effect_code_2, R.layout.spinner_item_layout_settings);
         spinner_PEC_2.setAdapter(panelEffectCode2OptionsAdapter);
         spinner_PEC_2.setSelection(0);
 

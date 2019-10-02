@@ -17,7 +17,7 @@
 
         <activity
             android:name=".HomeScreenActivity"
-            android:label="HomeScreen"
+            android:label="@string/app_name"
             android:screenOrientation="sensorLandscape"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
@@ -28,7 +28,7 @@
 
         <activity
             android:name=".SignController_1_Activity"
-            android:label="AppScreen1"
+            android:label="@string/app_name_sub_1"
             android:screenOrientation="sensorLandscape"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>

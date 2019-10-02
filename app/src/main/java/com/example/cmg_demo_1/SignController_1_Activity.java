@@ -254,7 +254,7 @@ public class SignController_1_Activity extends AppCompatActivity {
             //use intent to carry extra method pass the data to other activity and
             // write to serial by broadcast receiver in the usb service
             sendDataToUsbServiceToWrite(data.getBytes());
-            Toast.makeText(getApplicationContext(), "Sending: " + data, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Sending: " + data, Toast.LENGTH_SHORT).show();
             textViewTest.append(data + "\n");
 
             //when usb service started in this current activity, use following code to write to serial port directly
@@ -386,7 +386,7 @@ public class SignController_1_Activity extends AppCompatActivity {
             int targetWidgetId = getResources().getIdentifier(str, "id", this.getPackageName());
             editTextMsgStrings[j] = findViewById(targetWidgetId);
         }
-        spinnerSharedArrayAdapter = ArrayAdapter.createFromResource(this, R.array.digit_effect_code, android.R.layout.simple_spinner_item);
+        spinnerSharedArrayAdapter = ArrayAdapter.createFromResource(this, R.array.digit_effect_code, R.layout.spinner_item_layout_settings);
         for (int x = 0; x < JACKPOT_QTY; x++) {
             String str = "spinner_SignController_1_DigitEffectCode_" + (x + 1);
             int targetWidgetId = getResources().getIdentifier(str, "id", this.getPackageName());
@@ -468,7 +468,7 @@ public class SignController_1_Activity extends AppCompatActivity {
                     //use intent to carry extra method pass the data to other activity and
                     // write to serial by broadcast receiver in the usb service
                     sendDataToUsbServiceToWrite(data.getBytes());
-                    Toast.makeText(getApplicationContext(), "Sending: " + data, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Sending: " + data, Toast.LENGTH_SHORT).show();
 
                     //when usb service started in this current activity, use following code to write to serial port directly
                     //if (usbService != null) {

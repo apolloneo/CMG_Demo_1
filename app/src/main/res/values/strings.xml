@@ -5,11 +5,11 @@
     <!ENTITY tab "&#0009;">
     ]>
 <resources>
-    <string name="app_name">CMG_Demo_1</string>
+    <string name="app_name">CM Global Jackpot Sign Demonstrator</string>
     <string name="manual_update">TRANSMIT</string>
     <string name="auto_update"><font size = '24'>RANDOM UPDATE</font> \n\ <font size = '14'>Note: only one sign can be updated at a time randomly</font></string>
     <string name="stop">STOP</string>
-    <string name="cmg_settings_title">CM GLOBAL SIGN SETTINGS</string>
+    <string name="cmg_settings_title">CM GLOBAL PROTOCOL SETTINGS</string>
     <string name="select_manufacturer_code_title">Select Manufacturer Code:</string>
     <string name="cm">CM</string>
     <string name="pl">PL</string>
@@ -36,6 +36,8 @@
     <string name="sign_Help_main_title">Welcome to the CMGlobal Sign Demo Tablet</string>
     <string name="sign_Help_content"><font size ='22'><b>These instructions will allow you to update your CMGlobal Jackpot Signs.</b></font> \n\After reading these instructions tap the BACK button to return to updating your sign. \n\n\<font color = '#ff0000'>Plug the sign’s transmitter into the USB port on the side of the tablet.</font> \n\n\<font size = '20'><b>To update your sign: </b></font>\n\n\<font size = '18'><b>Random Updating:</b></font>  \n\&#9;• Random Update sends random, changing values to the different sign windows every few seconds  \n\&#9;• Select the RANDOM UPDATE box on the screen.  \n\&#9;• Tap TRANSMIT to start Random Updating on the sign.  \n\&#9;• Please note the tablet needs to be running for Random Updating, and only one sign can update randomly at any time. Any other signs need to be on Manual Updated. \n\n\<font size = '18'><b>Manual Updating: </b></font> \n\&#9;• Allows you to display specific jackpot values and text (if applicable) on your sign.  \n\&#9;• Tap in the digit box of the game you want to update.  \n\&#9;• A keyboard will appear.  \n\&#9; "        - Enter the value of the jackpot for the game you want to update."  \n\&#9; "        - For a blank space enter “X”"  \n\&#9; "        - For Billion dollar jackpots a “B” will display in the last position if you enter “B”" \n\&#9;• When you finish the first game tap in the digit box of the next game and repeat the process until all game values are on the screen.  \n\&#9;• Under each digit box check “Static” if you want the digits in that box to stay on, or check “Flash” if you want the digits in that box to flash for attention-getting value  \n\&#9;• Tap in the text box (if applicable) under the digit box. A keyboard will appear. Enter the characters you want for that text box. Text boxes are 5 or 7 characters in length.  \n\&#9;• Under each text box check “Static” if you want the text in that box to stay on, or check “Flash” if you want the text in that box to flash for attention-getting value  \n\&#9;• Tap TRANSMIT to send the entered data to the sign and update the sign. \n\n\<b>It may take several seconds for the first transmission to go through. \n\n\You can update a second sign (if applicable) once the first sign is updated by returning to the HOME screen and clicking on a different sign icon.</b></string>
     <string name="back_button_caption">BACK</string>
+    <string name="sign_id_initial_value">000001</string>
+    <string name="app_name_sub_1">VEND JACKPOT SIGN</string>
 
     <string-array name="digit_effect_code">
         <item>FS-Static</item>
